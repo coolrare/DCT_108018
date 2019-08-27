@@ -8,6 +8,11 @@ import { Router } from '@angular/router';
 })
 export class LoginComponent implements OnInit {
 
+  user = {
+    email: 'demo@miniasp.com',
+    password: ''
+  };
+
   constructor(private router: Router) { }
 
   ngOnInit() {

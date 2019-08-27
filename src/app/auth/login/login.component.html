@@ -5,18 +5,36 @@
       <div class="col-md-6 col-md-offset-3 col-xs-12">
         <h1 class="text-xs-center">Sign in</h1>
 
-        <div>
+        <form #form="ngForm">
           <fieldset class="form-group">
-            <input name="email" class="form-control form-control-lg" type="text" placeholder="Email">
+            <input name="email" class="form-control form-control-lg" type="text" placeholder="Email"
+            #userEmail="ngModel"
+            [(ngModel)]="user.email"
+            required
+            email>
+            <p>
+              {{ user.email }} / {{ userEmail.value }}
+            </p>
+            <div *ngIf="userEmail.invalid">
+              <p *ngIf="userEmail.errors['required']">請輸入 Email</p>
+              <p *ngIf="userEmail.errors['email']">Email 格式不正確</p>
+            </div>
           </fieldset>
 
           <fieldset class="form-group">
-            <input name="password" class="form-control form-control-lg" type="password" placeholder="Password" >
+            <input name="password" class="form-control form-control-lg"
+            required
+            minlength="4"
+            type="password" placeholder="Password" [(ngModel)]="user.password" #userPassword="ngModel">
+            <div *ngIf="userPassword.invalid">
+              {{ userPassword.errors | json }}
+            </div>
           </fieldset>
-          <button class="btn btn-lg btn-primary pull-xs-right" (click)="login()">
+          <button class="btn btn-lg btn-primary pull-xs-right" (click)="login()" [disabled]="form.invalid">
             Sign in
           </button>
-        </div>
+          {{ form.value | json }}
+        </form>
       </div>
 
     </div>
