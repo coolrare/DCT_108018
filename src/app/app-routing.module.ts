@@ -1,38 +1,17 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
-import { LoginComponent } from './auth/login/login.component';
 import { MainComponent } from './layout/main/main.component';
-import { PostsComponent } from './posts/posts/posts.component';
-import { PostComponent } from './posts/post/post.component';
-import { EditorComponent } from './posts/editor/editor.component';
 
 const routes: Routes = [
   {
     path: 'login',
-    component: LoginComponent
+    // component: LoginComponent
+    loadChildren: () => import('./auth/auth.module').then(m => m.AuthModule)
   },
   {
     path: '',
     component: MainComponent,
-    children: [
-      {
-        path: '',
-        redirectTo: 'posts',
-        pathMatch: 'full'
-      },
-      {
-        path: 'posts',
-        component: PostsComponent
-      },
-      {
-        path: 'post/:slug',
-        component: PostComponent
-      },
-      {
-        path: 'create',
-        component: EditorComponent
-      }
-    ]
+    loadChildren: () => import('./posts/posts.module').then(m => m.PostsModule)
   }
 ];
 
