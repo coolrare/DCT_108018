@@ -7,12 +7,18 @@
           <fieldset class="form-group">
             <!-- <input formControlName="title" class="form-control form-control-lg" type="text" placeholder="Post Title"> -->
             <input [formControl]="form.get('title')" class="form-control form-control-lg" type="text" placeholder="Post Title">
+            <div *ngIf="form.get('title').invalid">
+              {{ form.get('title').errors | json }}
+            </div>
           </fieldset>
           <fieldset class="form-group">
             <textarea formControlName="body" class="form-control" rows="8" placeholder="Write your post (in markdown)"></textarea>
+            <div *ngIf="form.get('body').invalid">
+              {{ form.get('body').errors | json }}
+            </div>
           </fieldset>
           <fieldset class="form-group">
-            <div formArrayName="tags">
+            <div formArrayName="tagList">
             <input class="form-control" type="text" placeholder="Enter tags"
               *ngFor="let control of tagControls"
               [formControl]="control">
