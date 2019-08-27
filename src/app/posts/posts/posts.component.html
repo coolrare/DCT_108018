@@ -12,7 +12,8 @@
 
       <div class="col-md-12">
 
-        <div class="post-preview" *ngFor="let article of articles?.articles">
+        <!-- <div class="post-preview" *ngFor="let article of articles?.articles"> -->
+        <div class="post-preview" *ngFor="let article of articles$ | async">
           <div class="post-meta">
 
             <div class="info">
