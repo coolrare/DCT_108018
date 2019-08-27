@@ -1,4 +1,7 @@
 import { Component, OnInit } from '@angular/core';
+import { ActivatedRoute } from '@angular/router';
+import { PostService } from 'src/app/post.service';
+import { Article } from 'src/app/articles';
 
 @Component({
   selector: 'app-post',
@@ -7,9 +10,16 @@ import { Component, OnInit } from '@angular/core';
 })
 export class PostComponent implements OnInit {
 
-  constructor() { }
+  article: Article;
+
+  constructor(private route: ActivatedRoute, private postService: PostService) {}
 
   ngOnInit() {
+    this.route.paramMap.subscribe(paramMap => {
+      const slug = paramMap.get('slug');
+      this.postService.getArticle(slug).subscribe(article => {
+        this.article = article.article;
+      });
+    });
   }
-
 }
