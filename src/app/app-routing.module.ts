@@ -17,6 +17,11 @@ const routes: Routes = [
     children: [
       {
         path: '',
+        redirectTo: 'posts',
+        pathMatch: 'full'
+      },
+      {
+        path: 'posts',
         component: PostsComponent
       },
       {
